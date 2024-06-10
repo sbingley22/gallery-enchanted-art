@@ -11,7 +11,7 @@ const images = [
   ]
 ]
 
-const Carosel = ({ showPics, setShowPics }) => {
+const Carosel = ({ showPics, setShowPics, setShowInfo }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const goToPrevious = () => {
@@ -24,6 +24,7 @@ const Carosel = ({ showPics, setShowPics }) => {
 
   const goBack = () => {
     setShowPics(null)
+    setShowInfo(null)
   }
 
   if (showPics == null) return

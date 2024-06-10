@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react'
 import { useThree } from '@react-three/fiber'
 import { Raycaster, Vector2 } from 'three'
 
-const Model = ({ showPics, setShowPics }) => {
+const Model = ({ showPics, setShowPics, setShowInfo }) => {
   const { scene, nodes, animations } = useGLTF(glbFile)
   const { names, actions, mixer } = useAnimations(animations, scene)
 
@@ -28,6 +28,7 @@ const Model = ({ showPics, setShowPics }) => {
       if (nodeName.includes("pics")) {
         node.castShadow = false
         node.receiveShadow = false
+        node.material.emissiveIntensity = 0.5
       }
     })
 
@@ -49,9 +50,10 @@ const Model = ({ showPics, setShowPics }) => {
       const intersects = raycaster.current.intersectObjects(scene.children, true)
 
       for (let i = 0; i < intersects.length; i++) {
-        if (intersects[i].object.name === 'a') {
+        if (intersects[i].object.name === 'picsA') {
           console.log('Mesh "a" clicked')
           setShowPics(0)
+          setShowInfo("A Collection")
           break
         }
       }
@@ -62,6 +64,7 @@ const Model = ({ showPics, setShowPics }) => {
     return () => {
       gl.domElement.removeEventListener('click', handleClick)
     }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scene, camera, gl])
   
@@ -72,15 +75,15 @@ const Model = ({ showPics, setShowPics }) => {
       <ambientLight intensity={0.4} />
       <pointLight intensity={10} position={[0,3.5,0]} castShadow />
 
-      <PerspectiveCamera position={[2,2,0]} makeDefault fov={50} />
+      <PerspectiveCamera position={[2,1.5,0]} makeDefault fov={50} />
       <OrbitControls 
-        target={[0,2,0]} 
+        target={[0,1.5,0]} 
         minPolarAngle={Math.PI/2}
         maxPolarAngle={Math.PI/2}
         minZoom={1}
         maxZoom={2}
-        minDistance={1}
-        maxDistance={4}
+        minDistance={.1}
+        maxDistance={3}
         enablePan={false}
       />
     </>

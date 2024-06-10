@@ -1,8 +1,12 @@
+/* eslint-disable react/prop-types */
 
-const InfoText = () => {
+const InfoText = ({ showInfo }) => {
+
+  if (showInfo == null) return
+  
   return (
     <div className="info-text">
-      <p>Click and drag to look around. Select a piece to view individual pictures.</p>
+      <p>{showInfo}</p>
     </div>
   )
 }
