@@ -22,12 +22,17 @@ const Carosel = ({ showPics, setShowPics }) => {
     setCurrentIndex((prevIndex) => (prevIndex === images[showPics].length - 1 ? 0 : prevIndex + 1))
   }
 
+  const goBack = () => {
+    setShowPics(null)
+  }
+
   if (showPics == null) return
 
   //console.log("Carosel active")
   
   return (
     <div className="carousel">
+      <button onClick={goBack} className="carousel-button back">{"X"}</button>
       <button onClick={goToPrevious} className="carousel-button previous">{"<"}</button>
       <img src={images[showPics][currentIndex]} alt="carousel" className="carousel-image" />
       <button onClick={goToNext} className="carousel-button next">{">"}</button>

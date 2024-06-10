@@ -22,10 +22,19 @@ const Model = ({ showPics, setShowPics }) => {
       const node = nodes[nodeName]
       if (node.type == "Mesh") {
         node.castShadow = true
+        //node.receiveShadow = true
+      }
+
+      if (nodeName.includes("pics")) {
+        node.castShadow = false
+        node.receiveShadow = false
       }
     })
 
-    scene.getObjectByName("Walls").receiveShadow = true
+    scene.getObjectByName("Walls").children.forEach(wall => {
+      wall.castShadow = false
+      wall.receiveShadow = true
+    })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -63,11 +72,16 @@ const Model = ({ showPics, setShowPics }) => {
       <ambientLight intensity={0.4} />
       <pointLight intensity={10} position={[0,3.5,0]} castShadow />
 
-      <PerspectiveCamera position={[0,2,-1]} makeDefault fov={50} />
+      <PerspectiveCamera position={[2,2,0]} makeDefault fov={50} />
       <OrbitControls 
         target={[0,2,0]} 
         minPolarAngle={Math.PI/2}
         maxPolarAngle={Math.PI/2}
+        minZoom={1}
+        maxZoom={2}
+        minDistance={1}
+        maxDistance={4}
+        enablePan={false}
       />
     </>
   )

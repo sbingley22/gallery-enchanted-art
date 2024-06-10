@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber"
 import { Suspense, useRef, useState } from "react"
 import Model from "./Model"
 import Carosel from "./Carosel"
+import InfoText from "./InfoText"
 
 const Gallery = ({ isMobile=false }) => {
   const containerRef = useRef()
@@ -17,6 +18,8 @@ const Gallery = ({ isMobile=false }) => {
       </Canvas>
       
       <Carosel showPics={showPics} setShowPics={setShowPics} />
+
+      <InfoText />
     </div>
   )
 }
