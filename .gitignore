@@ -12,6 +12,8 @@ node_modules
 
 public/*
 public/dev/*
+dev/*
+dist/dev/*
 
 # Editor directories and files
 .vscode/*
