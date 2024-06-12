@@ -6,8 +6,9 @@ import { useEffect, useRef } from 'react'
 import { useThree } from '@react-three/fiber'
 import { Raycaster, Vector2 } from 'three'
 
-const Model = ({ showPics, setShowPics, setShowInfo }) => {
+const Model = ({ setShowPics, setShowInfo }) => {
   const { scene, nodes, animations } = useGLTF(glbFile)
+  // eslint-disable-next-line no-unused-vars
   const { names, actions, mixer } = useAnimations(animations, scene)
 
   const raycaster = useRef(new Raycaster())
@@ -50,10 +51,25 @@ const Model = ({ showPics, setShowPics, setShowInfo }) => {
       const intersects = raycaster.current.intersectObjects(scene.children, true)
 
       for (let i = 0; i < intersects.length; i++) {
-        if (intersects[i].object.name === 'picsA') {
-          console.log('Mesh "a" clicked')
-          setShowPics(0)
-          setShowInfo("A Collection")
+        if (intersects[i].object.name === 'picsC') {
+          setShowPics(2)
+          setShowInfo("Mythical Collection")
+          break
+        } else if (intersects[i].object.name === 'picsD') {
+          setShowPics(3)
+          setShowInfo("Animal Collection")
+          break
+        } else if (intersects[i].object.name === 'picsE') {
+          setShowPics(4)
+          setShowInfo("Mermaid Collection")
+          break
+        } else if (intersects[i].object.name === 'picsF') {
+          setShowPics(5)
+          setShowInfo("Animal Collection")
+          break
+        } else if (intersects[i].object.name === 'picsG') {
+          setShowPics(6)
+          setShowInfo("Ogre Collection")
           break
         }
       }
